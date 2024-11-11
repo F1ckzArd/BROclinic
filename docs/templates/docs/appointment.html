@@ -1,0 +1,153 @@
+{% extends "layouts/app.html" %} {% load static %} {% block title %}Health
+Clinic - Appointment{% endblock %} {% block content %}
+<main>
+  <section class="contact-section section-padding mt-5 mb-5" id="section_6">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4 col-12 ms-auto mb-5 mb-lg-0">
+          <div class="contact-info-wrap">
+            <h2 style="margin-left: 80px">Get in touch</h2>
+
+            <div class="contact-image-wrap d-flex flex-wrap">
+              <img
+                src="{% static 'img/doc22.png' %}"
+                class="img-fluid avatar-image"
+                style="width: 289px"
+                alt="{% static 'img/doc22.png' %}"
+              />
+
+              <div class="d-flex flex-column justify-content-center ms-3">
+                <p class="mb-2">Clara Barton</p>
+                <p class="mb-2"><strong>HR & Office Manager</strong></p>
+              </div>
+            </div>
+
+            <div>
+              <p>{{ doctor.description }}</p>
+            </div>
+
+            <div class="contact-info">
+              <h5 class="mb-3">Contact Infomation</h5>
+
+              <p class="d-flex mb-2">
+                <i class="bi-geo-alt me-2"></i>
+                Kazakhstan, {% if user.city_location %} {{ user.city_location.name }}{% endif %}
+              </p>
+
+              <p class="d-flex mb-2">
+                <i class="bi-telephone me-2"></i>
+
+                <a href="tel: 8(7273)-7887-474"> 8(7273)-7887-474 </a>
+              </p>
+
+              <p class="d-flex">
+                <i class="bi-envelope me-2"></i>
+
+                <a href="mailto:{{ doctor.user.email }}"> {{ doctor.user.email }} </a>
+              </p>
+
+              <a href="#" class="btn btn-primary mt-2">Get Direction</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-5 col-12 mx-auto">
+          <form
+            class="custom-form contact-form"
+            action=""
+            method="post"
+            role="form"
+          >
+            {% csrf_token %}
+            <h2>Contact form</h2>
+            <p class="mb-4">
+              Or, you can just send an email:
+              <a href="#">AITU@clinic.kz</a>
+            </p>
+            <div class="row">
+              <div class="col-lg-6 col-md-6 col-12">
+                <input
+                  id="input-first_name"
+                  name="first_name"
+                  type="text"
+                  class="form-control"
+                  placeholder="Name"
+                  value="{% if form.first_name.value %}{{ form.first_name.value }}{% endif %}"
+                />
+                {% if form.errors.first_name %}
+                <div class="invalid-feedback d-block">
+                  {{ form.errors.first_name }}
+                </div>
+                {% endif %}
+              </div>
+              <div class="col-lg-6 col-md-6 col-12">
+                <input
+                  id="input-last_name"
+                  name="last_name"
+                  type="text"
+                  class="form-control"
+                  placeholder="Surname"
+                  value="{% if form.last_name.value %}{{ form.last_name.value }}{% endif %}"
+                />
+                {% if form.errors.last_name %}
+                <div class="invalid-feedback d-block">
+                  {{ form.errors.last_name }}
+                </div>
+                {% endif %}
+              </div>
+            </div>
+            <input
+              id="input-email"
+              name="email"
+              type="email"
+              pattern="[^ @]*@[^ @]*"
+              class="form-control"
+              placeholder="Clients@gmail.com"
+              value="{% if form.email.value %}{{ form.email.value }}{% endif %}"
+            />
+            {% if form.errors.email %}
+            <div class="invalid-feedback d-block">{{ form.errors.email }}</div>
+            {% endif %}
+            <input
+              id="input-phone"
+              name="phone"
+              type="tel"
+              class="form-control"
+              placeholder="Phone Number"
+              value="{% if form.phone.value %}{{ form.phone.value }}{% endif %}"
+            />
+            {% if form.errors.phone %}
+            <div class="invalid-feedback d-block">{{ form.errors.phone }}</div>
+            {% endif %}
+            <textarea
+              id="input-question"
+              name="question"
+              rows="5"
+              class="form-control"
+              placeholder="What can we help you?"
+            >
+{% if form.question.value %}{{ form.question.value }}{% endif %}</textarea
+            >
+            {% if form.errors.question %}
+            <div class="invalid-feedback d-block">
+              {{ form.errors.question }}
+            </div>
+            {% endif %}
+            <input
+              id="input-doctor"
+              name="doctor"
+              type="text"
+              class="d-none"
+              value="{{ doctor.id }}"
+            />
+
+            <button type="submit" class="form-control btn btn-outline-primary">
+              Send Message
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+{% endblock %}

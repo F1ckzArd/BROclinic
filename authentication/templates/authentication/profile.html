@@ -1,0 +1,79 @@
+{% extends "layouts/app.html" %} {% load static %} 
+{% block title %}BRO Clinic - Profile{% endblock %} 
+{% block content %}
+<main>
+  <section class="contact-section section-padding mt-5 mb-5" id="section_6">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4 col-12 ms-auto mb-5 mb-lg-0">
+          <div class="contact-info-wrap">
+            <h2 style="margin-left: 80px">Profile</h2>
+
+            <div class="contact-image-wrap d-flex flex-wrap">
+              {% comment %}
+              <img
+                src="{% static 'img/doc22.png' %}"
+                class="img-fluid avatar-image"
+                style="width: 289px"
+                alt="{% static 'img/doc22.png' %}"
+              />
+              {% endcomment %}
+
+              <div class="d-flex flex-column justify-content-center ms-3">
+                <p class="mb-2">{{ user.username }}</p>
+              </div>
+            </div>
+
+            <div class="contact-info">
+              <h5 class="mb-3">Contact Infomation</h5>
+
+              <p class="d-flex mb-2">
+                <i class="bi-geo-alt me-2"></i>
+                Kazakhstan, {% if user.city_location %} {{ user.city_location.name }}{% endif %}
+              </p>
+
+              <p class="d-flex">
+                <i class="bi-envelope me-2"></i>
+
+                <a href="mailto:{{ user.email }}"> {{ user.email }} </a>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-8 col-12 mx-auto">
+          <h1>Appointments</h1>
+          <div class="overflow-scroll">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Doctor</th>
+                  <th>Status</th>
+                  <th>Approved Status</th>
+                  <th>Created At</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for appointment in appointments %}
+                <tr>
+                  <td>
+                    {{ appointment.first_name }} {{ appointment.last_name }}
+                  </td>
+                  <td>{{ appointment.email }}</td>
+                  <td>{{ appointment.doctor.user.username }}</td>
+                  <td>{{ appointment.status }}</td>
+                  <td>{{ appointment.approval_status }}</td>
+                  <td>{{ appointment.created_at }}</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+{% endblock %}

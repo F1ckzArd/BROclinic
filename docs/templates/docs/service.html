@@ -1,0 +1,203 @@
+{% extends 'layouts/app.html' %} {% load static %} {% block title %}BRO
+Clinic - Service{% endblock %} {% block content %}
+
+<section class="py-5" id="contact">
+  <div class="container-xxl py-5">
+    <div class="col-12 d-flex flex-column text-center justify-content-center">
+      <h2
+        class="text-white dark-glow"
+        style="font-size: 50px; margin-top: 230px; margin-bottom: 230px"
+      >
+        OUR EXPERT DOCTORS
+      </h2>
+    </div>
+  </div>
+</section>
+
+<div class="container-xxl py-5">
+  <div class="container">
+    <div
+      class="text-center mx-auto mb-5 wow fadeInUp"
+      data-wow-delay="0.1s"
+      style="max-width: 600px"
+    >
+      <p class="d-inline-block border rounded-pill py-1 px-4">Doctors</p>
+      <h1>Our Expert "Doctors"</h1>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <form method="get">
+          <div class="row">
+            <div class="col-6 col-lg-4">
+              <select
+                id="input-city_location"
+                name="city_location"
+                class="form-control"
+                style="margin-left: 10px"
+                value="{{ filter.form.city_location.value }}"
+              >
+                <option disabled value="">Choose...</option>
+                {% for location_item in city_locations %}
+                <option value="{{ location_item.id }}">
+                  {{ location_item.name }}
+                </option>
+                {% endfor %}
+              </select>
+            </div>
+            <div class="col-4">
+              <input
+                id="input-user__username"
+                name="user__username"
+                type="text"
+                class="form-control"
+                placeholder="Search"
+                value="{% if filter.form.user__username.value %}{{ filter.form.user__username.value }}{% endif %}"
+              />
+              {% if filter.form.user__username.email %}
+              <div class="invalid-feedback d-block">
+                {{ filter.form.user__username.email }}
+              </div>
+              {% endif %}
+            </div>
+            <div class="col-2 d-flex justify-content-center">
+              <button class="btn btn-md btn-outline-primary mb-5">
+                Search
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="row g-4">
+      {% for doctor in doctors %}
+      <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+        <div class="team-item position-relative rounded overflow-hidden">
+          <div class="overflow-hidden">
+            {% if doctor.face_image %}
+            <img
+              class="img-fluid"
+              src="{{ doctor.face_image.url }}"
+              alt="{{ doctor.face_image.url }}"
+            />
+            {% else %}
+            <img
+              class="img-fluid"
+              src="{% static 'img/team-1.jpg' %}"
+              alt="{% static 'img/team-1.jpg' %}"
+            />
+            {% endif %}
+          </div>
+          <div class="team-text bg-light text-center p-4">
+            <h5>{{ doctor.user.username }}</h5>
+            <p class="text-primary">{{ doctor.institute }}</p>
+            <p>{{ doctor.description }}</p>
+            <a
+              class="btn btn-primary"
+              href="{% url 'docs:appointment' doctor_id=doctor.id %}"
+              >Make an appointment</a
+            >
+            <div class="team-social text-center">
+              <a class="btn btn-square" href=""
+                ><i class="fab fa-facebook-f"></i
+              ></a>
+              <a class="btn btn-square" href=""
+                ><i class="fab fa-twitter"></i
+              ></a>
+              <a class="btn btn-square" href=""
+                ><i class="fab fa-instagram"></i
+              ></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+<hr class="my-5 mt-5" />
+
+
+
+{% comment %}
+<h1 class="text-center mt-5">Get your service directly from the doctors</h1>
+<div id="section-service-form" class="row pt-4 mt-5">
+  <div class="col-12">
+    <form action="#section-service-form" method="POST">
+      {% csrf_token %}
+      <div class="row d-flex justify-content-center">
+        <div class="col-lg-4">
+          <div class="form-floating mb-3">
+            <input
+              id="input-name"
+              name="name"
+              type="text"
+              class="form-control {% if form.errors.name %}{% endif %}"
+              placeholder="Enter Name*"
+            />
+            <label for="input-name">Enter Name*</label>
+            {% if form.errors.name %}
+            <div class="invalid-feedback d-block">{{ form.errors.name }}</div>
+            {% endif %}
+          </div>
+          <div class="form-floating mb-3">
+            <input
+              id="input-email"
+              name="email"
+              type="email"
+              class="form-control {% if form.errors.email %}{% endif %}"
+              placeholder="Enter Email*"
+            />
+            <label for="input-email">Enter Email*</label>
+            {% if form.errors.email %}
+            <div class="invalid-feedback d-block">{{ form.errors.email }}</div>
+            {% endif %}
+          </div>
+          <div class="form-floating mb-3">
+            <select id="input-doctor" name="doctor" class="custom-select">
+              <option>Choose your doctor</option>
+              {% for doctor in doctors %}
+              <option value="{{ doctor.id }}">
+                {{ doctor.user.username }}
+              </option>
+              {% endfor %}
+            </select>
+            {% if form.errors.doctor %}
+            <div class="invalid-feedback d-block">{{ form.errors.doctor }}</div>
+            {% endif %}
+          </div>
+          <div class="form-floating mb-3">
+            <input
+              id="input-phone"
+              name="phone"
+              type="tel"
+              class="form-control {% if form.errors.phone %}{% endif %}"
+              placeholder="Enter Phone*"
+            />
+            <label for="input-phone">Enter Phone*</label>
+            {% if form.errors.phone %}
+            <div class="invalid-feedback d-block">{{ form.errors.phone }}</div>
+            {% endif %}
+          </div>
+        </div>
+        <div class="form-floating col-lg-6">
+          <textarea
+            id="input-question"
+            name="question"
+            class="form-control {% if form.errors.question %}{% endif %}"
+            placeholder="Leave a comment here"
+            style="height: 205px"
+          ></textarea>
+          <label for="input-question" class="px-4">Enter your question*</label>
+          {% if form.errors.question %}
+          <div class="invalid-feedback">{{ form.errors.question }}</div>
+          {% endif %}
+        </div>
+        <div class="col-12 mt-5 d-flex justify-content-center">
+          <button class="btn btn-lg btn-outline-primary mb-5">SEND</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+{% endcomment %} {% endblock %}

@@ -1,0 +1,45 @@
+{% extends 'layouts/app.html' %} {% load static %} {% load martortags %} 
+{% block title %}{{article.title}}{% endblock %} 
+{% block content %}
+<main>
+  <section
+    class="herox d-flex flex-column align-items-center justify-content-center"
+  >
+    <div class="text-center" style="margin-bottom: 300px">
+      <h1 class="h1 text-white fw-medium fst-italic"></h1>
+      <h2 class="display-3 text-white fw-bold">ARTICLES</h2>
+      <a href="#skills" class="btn btn-lg fs-6 fw-medium mt-5 btn-primary p-3"
+        >START</a
+      >
+    </div>
+  </section>
+
+  <section class="container py-5" id="skills" style="font-size: 15px">
+    <center>
+      <div class="container99" style="width: 600px; margin-top: 20px">{{ article.content|safe_markdown }}
+      </div>
+    </center>
+  </section>
+</main>
+<link
+  href="{% static 'plugins/css/ace.min.css' %}"
+  type="text/css"
+  media="all"
+  rel="stylesheet"
+/>
+<link
+  href="{% static 'martor/css/martor.bootstrap.min.css' %}"
+  type="text/css"
+  media="all"
+  rel="stylesheet"
+/>
+<script
+  type="text/javascript"
+  src="{% static 'plugins/js/highlight.min.js' %}"
+></script>
+<script>
+  $(".martor-preview pre").each(function (i, block) {
+    hljs.highlightBlock(block);
+  });
+</script>
+{% endblock %}

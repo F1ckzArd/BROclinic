@@ -1,0 +1,4 @@
+django
+pillow
+django-active-link
+django-filter
