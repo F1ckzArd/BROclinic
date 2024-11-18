@@ -2,7 +2,16 @@
 Clinic - Articles{% endblock %} {% block content %}
 <main>
 
-  
+  <style>
+    .yandexmap1{
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+    }
+    .titleYandex{
+      text-align: center;
+    }
+  </style>
 
   <section
     class="herox d-flex flex-column align-items-center justify-content-center"
@@ -70,8 +79,23 @@ Clinic - Articles{% endblock %} {% block content %}
         </ul>
 
         
+        
       </div>
     </center>
+    
+    <div class="line"><hr></div>
+
+    
+    <div class="titleYandex">
+      <h1>WE PLACED THERE!</h1>
+    </div>
+    
+    <div class="yandexmap1">
+      
+      <div class= "yandexmap">
+        <iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3A87221674eda978fbd0529ef460b3c73ed9c6a1e7732cd196e8839ab057cc604e&amp;source=constructor" width="600" height="300" frameborder="0"></iframe>
+      </div>
+    </div>  
   </section>
 </main>
 {% endblock %}
