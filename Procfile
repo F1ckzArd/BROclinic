@@ -1,1 +1,1 @@
-web: gunicorn BROclinic.wsgi:application
+web: gunicorn main.wsgi:application
