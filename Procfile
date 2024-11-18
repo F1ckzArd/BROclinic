@@ -1,1 +1,1 @@
-web: gunicorn main.wsgi:application
+web: gunicorn broclinic.wsgi --log-file -
