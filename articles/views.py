@@ -1,8 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from .models import Article
 
-# Create your views here.
-
 
 def article_list(request):
     articles = Article.objects.order_by('-updated_at')[:5]

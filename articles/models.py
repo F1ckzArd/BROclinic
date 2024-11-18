@@ -2,8 +2,6 @@ from django.db import models
 from utils.models import TimeStampedModel
 from martor.models import MartorField
 
-# Create your models here.
-
 
 class Article(TimeStampedModel):
     title = models.CharField(max_length=150, unique=True, verbose_name="Title")
