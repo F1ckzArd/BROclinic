@@ -3,7 +3,6 @@ from django.shortcuts import render
 from django.template.defaultfilters import first
 from .models import ExpertDoctorSuggestion
 
-# Create your views here.
 
 
 def index(request):
