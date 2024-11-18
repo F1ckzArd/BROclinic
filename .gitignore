@@ -1,14 +1,14 @@
-#python stuff
+
 venv/
 .env
 .pylintrc
 __pycache__/
 
-#ide stuff
+
 .vscode
 .idea
 
-#django stuff
+
 db.sqlite3
 media/
 static/
