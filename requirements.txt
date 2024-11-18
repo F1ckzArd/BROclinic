@@ -20,8 +20,8 @@ tzdata==2024.2
 urllib3==2.2.3
 webencodings==0.5.1
 =======
-Django==4.2.7
-Pillow==9.5.0
-django-active-link==1.1.0
-django-filter==23.2
+# Django==4.2.7
+# Pillow==9.5.0
+# django-active-link==1.1.0
+# django-filter==23.2
 >>>>>>> 1b00368b6542f4141736223ecc64fb00900435de

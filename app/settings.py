@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/4.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
+ALLOWED_HOSTS = ['F1ckzArd.pythonanywhere.com']
 
 
 ALLOWED_HOSTS = ['.herokuapp.com']
